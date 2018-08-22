@@ -1,0 +1,10 @@
+diff --git a/safec.pc.in b/safec.pc.in
+index 8f2dae97..9170ac6e 100644
+--- a/safec.pc.in
++++ b/safec.pc.in
+@@ -9,4 +9,4 @@ Description: A safe coding library for C, ref ISO TR24731, C11 Annex K
+ Version: @VERSION@
+ URL: @PACKAGE_URL@
+ Libs: -L${libdir} -lsafec-@SAFEC_API_VERSION@
+-Cflags: -I${includedir}/safec-@SAFEC_API_VERSION@ -I${libdir}/safec-@SAFEC_API_VERSION@/include
++Cflags: -I${includedir}/libsafec
