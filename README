@@ -1,0 +1,3 @@
+Notes:
+build.patch should be removed in the next release as it is upstream
+test failures due to wget failure but should be rechecked on version update
