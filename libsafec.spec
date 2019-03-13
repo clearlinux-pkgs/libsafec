@@ -4,7 +4,7 @@
 #
 Name     : libsafec
 Version  : 03032018
-Release  : 3
+Release  : 4
 URL      : https://github.com/rurban/safeclib/releases/download/v03032018/libsafec-03032018.0-g570fa5.tar.xz
 Source0  : https://github.com/rurban/safeclib/releases/download/v03032018/libsafec-03032018.0-g570fa5.tar.xz
 Summary  : A safe coding library for C, ref ISO TR24731, C11 Annex K
@@ -81,9 +81,9 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552497637
+export SOURCE_DATE_EPOCH=1552498823
 export LDFLAGS="${LDFLAGS} -fno-lto"
-%reconfigure --disable-static --enable-strmax=0x8000
+%reconfigure --disable-static --enable-strmax=1048576
 make  %{?_smp_mflags}
 
 %check
@@ -95,7 +95,7 @@ export ftp_proxy=http://127.0.0.1:21/
 make check ||:
 
 %install
-export SOURCE_DATE_EPOCH=1552497637
+export SOURCE_DATE_EPOCH=1552498823
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libsafec
 cp COPYING %{buildroot}/usr/share/package-licenses/libsafec/COPYING
