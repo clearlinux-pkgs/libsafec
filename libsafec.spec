@@ -4,15 +4,15 @@
 #
 Name     : libsafec
 Version  : 03032018
-Release  : 2
+Release  : 3
 URL      : https://github.com/rurban/safeclib/releases/download/v03032018/libsafec-03032018.0-g570fa5.tar.xz
 Source0  : https://github.com/rurban/safeclib/releases/download/v03032018/libsafec-03032018.0-g570fa5.tar.xz
 Summary  : A safe coding library for C, ref ISO TR24731, C11 Annex K
 Group    : Development/Tools
 License  : MIT
-Requires: libsafec-bin
-Requires: libsafec-lib
-Requires: libsafec-license
+Requires: libsafec-bin = %{version}-%{release}
+Requires: libsafec-lib = %{version}-%{release}
+Requires: libsafec-license = %{version}-%{release}
 BuildRequires : automake
 BuildRequires : automake-dev
 BuildRequires : doxygen
@@ -37,7 +37,7 @@ under the root directory of this release. Basically it's MIT licensed.
 %package bin
 Summary: bin components for the libsafec package.
 Group: Binaries
-Requires: libsafec-license
+Requires: libsafec-license = %{version}-%{release}
 
 %description bin
 bin components for the libsafec package.
@@ -46,9 +46,9 @@ bin components for the libsafec package.
 %package dev
 Summary: dev components for the libsafec package.
 Group: Development
-Requires: libsafec-lib
-Requires: libsafec-bin
-Provides: libsafec-devel
+Requires: libsafec-lib = %{version}-%{release}
+Requires: libsafec-bin = %{version}-%{release}
+Provides: libsafec-devel = %{version}-%{release}
 
 %description dev
 dev components for the libsafec package.
@@ -57,7 +57,7 @@ dev components for the libsafec package.
 %package lib
 Summary: lib components for the libsafec package.
 Group: Libraries
-Requires: libsafec-license
+Requires: libsafec-license = %{version}-%{release}
 
 %description lib
 lib components for the libsafec package.
@@ -81,8 +81,9 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536122981
-%reconfigure --disable-static
+export SOURCE_DATE_EPOCH=1552497637
+export LDFLAGS="${LDFLAGS} -fno-lto"
+%reconfigure --disable-static --enable-strmax=0x8000
 make  %{?_smp_mflags}
 
 %check
@@ -90,13 +91,14 @@ export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check || :
+export ftp_proxy=http://127.0.0.1:21/
+make check ||:
 
 %install
-export SOURCE_DATE_EPOCH=1536122981
+export SOURCE_DATE_EPOCH=1552497637
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/libsafec
-cp COPYING %{buildroot}/usr/share/doc/libsafec/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/libsafec
+cp COPYING %{buildroot}/usr/share/package-licenses/libsafec/COPYING
 %make_install
 ## install_append content
 rm -rf %{buildroot}/usr/share/man
@@ -127,5 +129,5 @@ rm -rf %{buildroot}/usr/share/man
 /usr/lib64/libsafec-3.3.so.3.0.3
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/libsafec/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libsafec/COPYING
