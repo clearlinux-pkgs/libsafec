@@ -4,7 +4,7 @@
 #
 Name     : libsafec
 Version  : 03032018
-Release  : 4
+Release  : 5
 URL      : https://github.com/rurban/safeclib/releases/download/v03032018/libsafec-03032018.0-g570fa5.tar.xz
 Source0  : https://github.com/rurban/safeclib/releases/download/v03032018/libsafec-03032018.0-g570fa5.tar.xz
 Summary  : A safe coding library for C, ref ISO TR24731, C11 Annex K
